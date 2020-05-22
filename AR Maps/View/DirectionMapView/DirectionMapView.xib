@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DirectionMapView" customModule="AR_Maps" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="286"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0vC-Gw-hEj" customClass="GMSMapView">
+                    <rect key="frame" x="0.0" y="14" width="414" height="272"/>
+                    <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="0vC-Gw-hEj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Brt-gf-hfV"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="0vC-Gw-hEj" secondAttribute="trailing" id="TUT-KI-Zjw"/>
+                <constraint firstItem="0vC-Gw-hEj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="i8z-vc-yL9"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="0vC-Gw-hEj" secondAttribute="bottom" id="qU3-mg-GA1"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="directionMapView" destination="0vC-Gw-hEj" id="QiD-RT-7ET"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="83.705357142857139"/>
+        </view>
+    </objects>
+</document>

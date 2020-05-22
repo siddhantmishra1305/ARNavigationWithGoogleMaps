@@ -1,0 +1,6 @@
+module Pods_AR_Maps {
+  umbrella header "Pods-AR Maps-umbrella.h"
+
+  export *
+  module * { export * }
+}

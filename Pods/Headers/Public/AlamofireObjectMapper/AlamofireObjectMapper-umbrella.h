@@ -1,0 +1,1 @@
+../../../Target Support Files/AlamofireObjectMapper/AlamofireObjectMapper-umbrella.h
