@@ -10,6 +10,8 @@ import Foundation
 import CoreLocation
 import GooglePlaces
 import GoogleMaps
+import ARCL
+import ARKit
 
 class HomeViewModel{
     
@@ -35,10 +37,7 @@ class HomeViewModel{
                     
                     //creating a marker view
                     let markerView = UIImageView(image: markerImage)
-                    
-                    //changing the tint color of the image
-            //        markerView.tintColor = #colorLiteral(red: 0.262745098, green: 0.2588235294, blue: 0.3294117647, alpha: 1)
-                    
+
                     marker.position = location
                     marker.iconView = markerView
         }
@@ -72,6 +71,50 @@ class HomeViewModel{
         UIGraphicsEndImageContext()
         return newImage
     }
+    
+    func contructNodes(travelDetails:TravelDetail?,locationManager:CLLocationManager)->LocationNode?{
+          if let steps = travelDetails?.directions{
+              let altitude = locationManager.location?.altitude
+              for i in 0..<steps.count-1 {
+                  
+                  let currentdoubleLat = steps[i].startlat
+                  let currentdoubleLon = steps[i].startlon
+                  
+                  let currentlat = CLLocationDegrees(exactly: currentdoubleLat!)
+                  let currentlon = CLLocationDegrees(exactly: currentdoubleLon!)
+                  let currentcoordinate = CLLocationCoordinate2D(latitude: currentlat!, longitude: currentlon!)
+                  
+                  
+                  let nextdoubleLat = steps[i+1].startlat
+                  let nextdoubleLon = steps[i+1].startlon
+                  
+                  let nextcurrentlat = CLLocationDegrees(exactly: nextdoubleLat!)
+                  let nextcurrentlon = CLLocationDegrees(exactly: nextdoubleLon!)
+                  let nextcurrentcoordinate = CLLocationCoordinate2D(latitude: nextcurrentlat!, longitude: nextcurrentlon!)
+                  
+                  let currentLocation = CLLocation(coordinate: currentcoordinate, altitude: altitude!)
+                  let nextLocation = CLLocation(coordinate: nextcurrentcoordinate, altitude: altitude!)
+                  let midLocation = currentLocation.approxMidpoint(to: nextLocation)
+                  
+                  let distance = currentLocation.distance(from: nextLocation)
+                  
+                  let box = SCNBox(width: 0.75, height: 0.5, length: CGFloat(distance), chamferRadius: 0.25)
+                  box.firstMaterial?.diffuse.contents = UIColor.blue.withAlphaComponent(0.7)
+                  let boxNode = SCNNode(geometry: box)
+                  boxNode.removeFlicker()
+                  
+                  let bearing = -currentLocation.bearing(between: nextLocation)
+                  
+                  // Orient the line to point from currentLoction to nextLocation
+                  boxNode.eulerAngles.y = Float(bearing).degreesToRadians
+                  
+                  let locationNode = LocationNode(location: midLocation, tag: "")
+                  locationNode.addChildNode(boxNode)
+                  return locationNode
+              }
+          }
+        return nil
+      }
     
 }
 

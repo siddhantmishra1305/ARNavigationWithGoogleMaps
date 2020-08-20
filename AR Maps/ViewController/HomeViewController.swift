@@ -10,9 +10,10 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import CoreLocation
+import ARKit
+import ARCL
 
 class HomeViewController: UIViewController {
-    
     
     @IBOutlet weak var destinationBtn: UIButton!
     @IBOutlet weak var homeMapView: GMSMapView!
@@ -58,12 +59,12 @@ class HomeViewController: UIViewController {
             self.navigationController?.pushViewController(vc!, animated: true)
         }
     }
-
-@IBAction func destinationBtnAction(_ sender: Any) {
-    let acController = GMSAutocompleteViewController()
-    acController.delegate = self
-    self.present(acController, animated: true, completion: nil)
-}
+    
+    @IBAction func destinationBtnAction(_ sender: Any) {
+        let acController = GMSAutocompleteViewController()
+        acController.delegate = self
+        self.present(acController, animated: true, completion: nil)
+    }
 }
 
 extension HomeViewController: CLLocationManagerDelegate {
