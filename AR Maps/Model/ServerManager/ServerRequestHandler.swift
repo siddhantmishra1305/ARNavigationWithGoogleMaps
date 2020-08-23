@@ -12,20 +12,20 @@ import Alamofire
 internal enum ServerRequestRouter: URLRequestConvertible{
     
     case getPath(String,String,Bool)
-   
     
-
+    
+    
     var httpMethod:Alamofire.HTTPMethod {
         switch self {
-            case .getPath:
-                return .get
+        case .getPath:
+            return .get
         }
     }
     
     var path: String {
         
         switch self {
-
+            
         case .getPath:
             return "https://maps.googleapis.com/maps/api/directions/json"
         }
@@ -38,24 +38,24 @@ internal enum ServerRequestRouter: URLRequestConvertible{
         mutableURLRequest.httpMethod = httpMethod.rawValue
         mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         switch  self {
-        
+            
         case .getPath(let origin,let destination,let sensor):
-              do{
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    let mapKey = appDelegate.googleMapsKey
+            do{
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                let mapKey = appDelegate.googleMapsKey
                 
-                    var params = [String:Any]()
-                    params["origin"] = origin
-                    params["destination"] = destination
-                    params["sensor"] = sensor
-                    params["key"] = mapKey
+                var params = [String:Any]()
+                params["origin"] = origin
+                params["destination"] = destination
+                params["sensor"] = sensor
+                params["key"] = mapKey
                 
-                           
-                    let encoding = URLEncoding(destination: URLEncoding.Destination.queryString)
-                    return try encoding.encode(mutableURLRequest, with: params)
-              } catch {
-                    return mutableURLRequest
-              }
+                
+                let encoding = URLEncoding(destination: URLEncoding.Destination.queryString)
+                return try encoding.encode(mutableURLRequest, with: params)
+            } catch {
+                return mutableURLRequest
+            }
         }
     }
 }

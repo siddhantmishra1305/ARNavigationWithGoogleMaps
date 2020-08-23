@@ -65,7 +65,6 @@ class DirectionsViewController: UIViewController {
         mapView.setupMapView(polyString: polyString!)
         directionMapView.addSubview(mapView)
         directionMapView.addTopRoundedCornerToView(desiredCurve: 4.0)
-        
     }
 }
 
